@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project File Browser - User Guide & Documentation</title>
+    <style>
+        :root {
+            --bg-primary: #12151a;
+            --bg-secondary: #1a1e24;
+            --bg-card: #222730;
+            --text-primary: #f0f3f6;
+            --text-secondary: #9da7b3;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a86ff;
+            --accent-green: #00f076;
+            --accent-amber: #ffaa00;
+            --border-color: #2e3642;
+            --code-bg: #0d1117;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .preview-img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+            margin: 24px 0 36px 0;
+            display: block;
+        }
+        section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        h2 {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            margin: 24px 0 12px 0;
+        }
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+        ul, ol { margin-left: 24px; margin-bottom: 20px; color: var(--text-secondary); }
+        li { margin-bottom: 8px; }
+        strong { color: var(--text-primary); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: rgba(0,0,0,0.25);
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        td code, p code, li code {
+            background: var(--code-bg);
+            color: var(--accent-cyan);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 16px 0;
+            color: #d1d5db;
+            font-family: Consolas, monospace;
+            font-size: 0.9rem;
+        }
+        .callout {
+            background: rgba(0, 210, 255, 0.08);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        .callout p { margin: 0; color: var(--text-primary); }
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Unreal Engine 5 Plugin</div>
+            <h1>Project File Browser</h1>
+            <p class="subtitle">Discovers, displays, and previews non-Unreal asset files directly inside Unreal Engine's Content Browser.</p>
+        </header>
+
+        <img class="preview-img" src="Resources/screenshot.png" alt="Project File Browser Content Browser Preview">
+
+        <section id="overview">
+            <h2>Plugin Overview</h2>
+            <p><strong>Project File Browser</strong> brings raw project files (.png, .jpg, .jpeg, .json, .txt, .md, and any configured custom extensions) into Unreal Engine's Content Browser alongside standard .uasset files without requiring importation or asset conversions.</p>
+            <ul>
+                <li><strong>Native Content Browser Experience:</strong> Custom files appear in their respective folders in the path hierarchy (/Game, Plugin roots, etc.).</li>
+                <li><strong>Dynamic Image Thumbnails:</strong> Automatically loads and generates 256&times;256 aspect-ratio-preserved thumbnails for images.</li>
+                <li><strong>On-Disk Hot Reloading:</strong> Automatically invalidates and refreshes thumbnails when files on disk are edited in external software.</li>
+                <li><strong>External Tool Launch:</strong> Double-clicking opens the file in the operating system's registered application.</li>
+            </ul>
+        </section>
+
+        <section id="settings">
+            <h2>Project Settings Configuration</h2>
+            <p>All settings are located under <strong>Edit &gt; Project Settings &gt; Editor &gt; Project File Browser</strong>.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>bEnableFileBrowser</code></td>
+                        <td>Boolean</td>
+                        <td><code>true</code></td>
+                        <td>Enables or disables the custom project file data source.</td>
+                    </tr>
+                    <tr>
+                        <td><code>MonitoredExtensions</code></td>
+                        <td>Array</td>
+                        <td>PNG, JPG, JPEG, JSON, TXT</td>
+                        <td>List of extension configuration entries.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Extension Config Entry Properties</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Extension</strong></td>
+                        <td>FString</td>
+                        <td>File extension without leading dot (e.g. <code>png</code>, <code>md</code>, <code>json</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DisplayName</strong></td>
+                        <td>FText</td>
+                        <td>Display name shown on the Content Browser tile (e.g. <code>Markdown Document</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AccentColor</strong></td>
+                        <td>FLinearColor</td>
+                        <td>Color strip displayed at the bottom edge of the tile.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bGenerateImageThumbnail</strong></td>
+                        <td>Boolean</td>
+                        <td>If true, parses image pixels and renders the file as a thumbnail.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="usage">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Drop files (e.g. <code>icon.png</code>, <code>notes.md</code>, <code>data.json</code>) into your project's <code>Content/</code> directory.</li>
+                <li>Open the Content Browser and navigate to that folder. The files appear immediately.</li>
+                <li><strong>Double-Click</strong> any file to open it in its default desktop program (VS Code, Photoshop, Notepad, etc.).</li>
+                <li><strong>Right-Click</strong> to view actions such as <em>Open in Default Program</em> or <em>Show in Explorer</em>.</li>
+            </ol>
+            <div class="callout">
+                <p><strong>Note:</strong> Modifying an image in external tools (like Photoshop or Aseprite) will update the thumbnail in the Content Browser on save.</p>
+            </div>
+        </section>
+
+        <section id="technical-info">
+            <h2>Technical Information</h2>
+            <ul>
+                <li><strong>Module Type:</strong> Editor (Developer / Content Management)</li>
+                <li><strong>Loading Phase:</strong> Default</li>
+                <li><strong>Supported Development Platforms:</strong> Win64</li>
+                <li><strong>Supported Target Platforms:</strong> Win64</li>
+                <li><strong>Network Replicated:</strong> No (Editor-only utility)</li>
+                <li><strong>Dependencies:</strong> Unreal Engine built-in <code>ContentBrowserFileDataSource</code> plugin.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Vahab Ahmadvand. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
