@@ -8,6 +8,14 @@
 
 class FAssetThumbnail;
 
+/** Stashed folder files for crash/deletion-proof folder rename in Unreal Engine Content Browser */
+struct FFolderRenameStashEntry
+{
+	FString StashDirPath;
+	TArray<FString> RelativeFilePaths;
+	FDateTime StashTime;
+};
+
 /**
  * Custom Content Browser Data Source for non-Unreal project files.
  * Inherits from UContentBrowserFileDataSource to reuse folder/file scanning,
@@ -35,7 +43,22 @@ public:
 	/** Opens the file in the default OS application (e.g. Photoshop, VS Code, Notepad) */
 	virtual bool EditItem(const FContentBrowserItemData& InItem) override;
 
+	/** Verifies whether an item (or folder) can be renamed, safely stashing files before engine folder deletion */
+	virtual bool CanRenameItem(const FContentBrowserItemData& InItem, const FString* InNewName, const IContentBrowserHideFolderIfEmptyFilter* HideFolderIfEmptyFilter, FText* OutErrorMsg) override;
+
+	/** Renames item or folder, restoring and registering all non-asset files safely without any loss */
+	virtual bool RenameItem(const FContentBrowserItemData& InItem, const FString& InNewName, FContentBrowserItemData& OutNewItem) override;
+
 private:
+	/** Resolves physical disk path for an item or folder */
+	bool ResolveItemDiskPath(const FContentBrowserItemData& InItem, FString& OutDiskPath);
+
+	/** Stashes non-asset files from folder into Saved/ProjectFileBrowser/RenameStash before engine operations */
+	void StashFolderFiles(const FString& InSourceDiskPath);
+
 	/** Timestamps of cached image files to detect on-disk modifications */
 	TMap<FString, FDateTime> ThumbnailFileTimestamps;
+
+	/** Active folder rename stashes mapped by SourceDiskPath */
+	TMap<FString, FFolderRenameStashEntry> FolderRenameStashes;
 };
