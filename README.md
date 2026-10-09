@@ -3,6 +3,8 @@
 **Project File Browser** is an Unreal Engine 5 editor plugin that discovers, displays, and previews non-Unreal asset files (such as `.png`, `.jpg`, `.jpeg`, `.json`, `.txt`, `.md`, and more) directly within the Content Browser alongside native `.uasset` assets.
 
 ---
+### Download Pre-built version
+Download from Fab https://www.fab.com/listings/a0c68e03-5704-4274-97c0-bfd87e11dd30
 
 ## Features
 
